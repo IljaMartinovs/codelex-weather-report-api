@@ -22,13 +22,11 @@ while(true) {
             echo "Weather : {$city->getWeather()}\n";
             echo "Wind speed : {$city->getWind()}\n";
             break;
-
         case 2 :
             foreach ($collection as $city){
                 echo $city->getAllData();
             }
             break;
-
         default:
             exit;
     }
