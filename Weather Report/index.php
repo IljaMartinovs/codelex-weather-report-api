@@ -1,8 +1,6 @@
 <?php
 
-require_once "City.php";
-require_once "Api.php";
-require_once "CityCollection.php";
+use App\{Api,City,CityCollection};
 $collection = [];
 
 while(true) {
