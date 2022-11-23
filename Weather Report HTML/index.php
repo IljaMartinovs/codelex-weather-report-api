@@ -65,7 +65,7 @@ if (($_POST) != null) {
     </form>
 
     <form action="" method="post">
-    Enter city : <input type="text" name="city">
+    Enter city : <input type="text" name="city" required>
     <input type="submit"><br>
     <?php if($_POST != null) { ?>
         <?php echo "City is : $town"?><br>
