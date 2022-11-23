@@ -1,19 +1,20 @@
 <?php
 
 use Carbon\Carbon;
-use App\Api;
+use App\Controllers\ApiControllers;
 
 require_once "vendor/autoload.php";
 
-if (isset($_POST['city']))
-    $name = $_POST['city'];
-else
-    $_POST['city'] = 'Riga';
+$time = $_GET['city'] ?? 'Riga';
+$timezone = 'Europe';
+var_dump($timezone);
+$api = new ApiControllers($time);
+$city = $api->getData();
 
-if (($_POST) != null) {
-    $name = $_POST['city'];
-    $api = new Api($name);
-    $city = $api->getData();
+try {
+    $localTime = Carbon::now($timezone . '/' . $time);
+} catch (\Carbon\Exceptions\InvalidFormatException $e) {
+    $localTime = Carbon::now();
 }
 ?>
 
@@ -32,24 +33,18 @@ if (($_POST) != null) {
     <a href="/?city=Riga">Riga &#x1F1F1;&#x1F1FB;</a>
     <a href="/?city=Tallinn">Tallinn &#127466;&#127466;</a>
     <a href="/?city=Vilnius">Vilnius &#127473;&#127481;</a><br>
-
     <div>
-        <form action="" method="get">
-            <?php if ($_GET != null) { ?>
-                <?php echo "\u{1F551}Time in {$_GET['city']} is : " . Carbon::now('Europe/' . $_GET['city']); ?><br>
-            <?php } ?>
-        </form>
+        <?php echo "Time in $time is : " . $localTime ?>;
 
-        <form action="" method="post">
+        <form action="" method="get">
             Enter city : <input type="text" name="city" required>
             <input type="submit"><br>
-            <?php if ($_POST != null) { ?>
-                <?php echo "City is : {$city->getCity()}" ?><br>
-                <?php echo "Temperature is : {$city->getTemperature()} C \u{1F321}" ?><br>
-                <?php echo "Weather is : {$city->getWeather()}" ?><br>
-                <?php echo "Wind is : {$city->getWind()} m/s \u{1F32C}" ?><br>
-            <?php } ?>
+            <?php echo "City is : {$city->getCity()}" ?><br>
+            <?php echo "Temperature is : {$city->getTemperature()} C \u{1F321}" ?><br>
+            <?php echo "Weather is : {$city->getWeather()}" ?><br>
+            <?php echo "Wind is : {$city->getWind()} m/s \u{1F32C}" ?><br>
         </form>
+
     </div>
 </h1>
 </body>
