@@ -1,7 +1,7 @@
 <?php
 
 use Carbon\Carbon;
-use App\Controllers\ApiControllers;
+use App\Api;
 
 require_once "vendor/autoload.php";
 
