@@ -36,5 +36,4 @@ class City
     {
         return $this->wind;
     }
-
 }
