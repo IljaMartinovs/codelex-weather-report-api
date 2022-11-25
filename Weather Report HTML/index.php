@@ -7,7 +7,6 @@ require_once "vendor/autoload.php";
 
 $time = $_GET['city'] ?? 'Riga';
 $timezone = 'Europe';
-var_dump($timezone);
 $api = new ApiControllers($time);
 $city = $api->getData();
 
